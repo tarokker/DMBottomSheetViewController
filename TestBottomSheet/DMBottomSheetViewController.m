@@ -35,7 +35,8 @@
 @private
     __weak UIViewController *rootController;
     UIView *backView;
-    UINavigationBar *navBar;
+    UIView *navView, *shadowNavView;
+    UILabel *lblTitle;
     BOOL isFullOpened;
 }
 
@@ -71,18 +72,26 @@
         [self addChildViewController:rootController];
         
         // navbar
-        navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64.0)];
-        navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-        UINavigationItem *navItem = [[UINavigationItem alloc] init];
-        [navItem setTitle:rootController.title];
-        [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: self.titleFont}];
-        [navBar setTintColor:[UIColor colorWithRed:0.600 green:0.600 blue:0.600 alpha:1.00]];
-        [navBar setBackgroundColor:nil];
-        [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        [navBar setShadowImage:[UIImage new]];
-        [navItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"dmbs_gray_x"] style:UIBarButtonItemStylePlain target:self action:@selector(didTapOnX:)]];
-        [navBar setItems:@[navItem]];
-        [self.view addSubview:navBar];
+        navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64.0)];
+        navView.backgroundColor = [UIColor clearColor];
+        navView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        UIButton *btnClose = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnClose addTarget:self action:@selector(didTapOnX:) forControlEvents:UIControlEventTouchUpInside];
+        [btnClose setImage:[UIImage imageNamed:@"dmbs_gray_x"] forState:UIControlStateNormal];
+        [btnClose setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
+        [btnClose setFrame:CGRectMake(5, 26, 38, 30)];
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, btnClose.frame.origin.y, navView.frame.size.width, btnClose.frame.size.height)];
+        lblTitle.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
+        lblTitle.backgroundColor = [UIColor clearColor];
+        lblTitle.textAlignment = NSTextAlignmentCenter;
+        [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:rootController.title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: self.titleFont}]];
+        shadowNavView = [[UIView alloc] initWithFrame:CGRectMake(0, navView.frame.size.height - 1.0, navView.frame.size.width, 1.0)];
+        [shadowNavView setBackgroundColor:[UIColor clearColor]];
+        shadowNavView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
+        [navView addSubview:shadowNavView];
+        [navView addSubview:lblTitle];
+        [navView addSubview:btnClose];
+        [self.view addSubview:navView];
         
         // aggiunge gesture sulla view
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPanGesture:)];
@@ -142,12 +151,14 @@
         self.view.frame = parentctl.view.bounds;
         rootController.view.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, rootController.view.frame.size.height);
         backView.alpha = 0.0;
-        navBar.alpha = 0.0;
+        navView.alpha = 0.0;
+        shadowNavView.alpha = 0.0;
         
         // anima apertura
         [self _animateScrollToHalfWithAddedAnimations:^{
             backView.alpha = 1.0;
-            navBar.alpha = 1.0;
+            navView.alpha = 1.0;
+            shadowNavView.alpha = 1.0;
         }];
     });
 }
@@ -172,7 +183,8 @@
         [UIView animateWithDuration:0.2 animations:^{
             rootController.view.frame = CGRectMake(rootController.view.frame.origin.x, self.view.frame.size.height, rootController.view.frame.size.width, rootController.view.frame.size.height);
             backView.alpha = 0.0;
-            navBar.alpha = 0.0;
+            navView.alpha = 0.0;
+            shadowNavView.alpha = 0.0;
         } completion:^(BOOL finished) {
             closeBlock();
         }];
@@ -196,34 +208,33 @@
 
 - (void)_recalcNavbarColors:(BOOL)animated
 {
-    if ( rootController.view.frame.origin.y <= CGRectGetMaxY(navBar.frame) )
+    if ( rootController.view.frame.origin.y <= CGRectGetMaxY(navView.frame) )
     {
-        if ( navBar.tag == 0 )
+        if ( navView.tag == 0 )
         {
-            [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:102.0/255.0 green:102.0/255.0 blue:102.0/255.0 alpha:1.0], NSFontAttributeName: self.titleFont}];
-            [navBar setShadowImage:nil];
+            [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:rootController.title attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:102.0/255.0 green:102.0/255.0 blue:102.0/255.0 alpha:1.0], NSFontAttributeName: self.titleFont}]];
+            [shadowNavView setBackgroundColor:[UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:200.0/255.0]];
             if ( animated )
             {
                 [UIView animateWithDuration:0.1 animations:^{
-                    [navBar setBackgroundColor:[UIColor whiteColor]];
+                    [navView setBackgroundColor:[UIColor whiteColor]];
                 }];
             }
             else
             {
-                [navBar setBackgroundColor:[UIColor whiteColor]];
+                [navView setBackgroundColor:[UIColor whiteColor]];
             }
-            navBar.tag = 1;
+            navView.tag = 1;
         }
     }
     else
     {
-        if ( navBar.tag == 1 )
+        if ( navView.tag == 1 )
         {
-            [navBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: self.titleFont}];
-            [navBar setBackgroundColor:nil];
-            [navBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-            [navBar setShadowImage:[UIImage new]];
-            navBar.tag = 0;
+            [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:rootController.title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: self.titleFont}]];
+            [shadowNavView setBackgroundColor:[UIColor clearColor]];
+            [navView setBackgroundColor:[UIColor clearColor]];
+            navView.tag = 0;
         }
     }
 }
@@ -232,7 +243,7 @@
 - (void)_animateScrollToTop
 {
     [UIView animateWithDuration:0.2 animations:^{
-        rootController.view.frame = CGRectMake(rootController.view.frame.origin.x, CGRectGetMaxY(navBar.frame), rootController.view.frame.size.width, rootController.view.frame.size.height);
+        rootController.view.frame = CGRectMake(rootController.view.frame.origin.x, CGRectGetMaxY(navView.frame), rootController.view.frame.size.width, rootController.view.frame.size.height);
         [self _fixPositionYIfTooHigh];
         [self _recalcNavbarColors:NO];
     }];
@@ -256,7 +267,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    if ([touch.view isDescendantOfView:navBar])
+    if ([touch.view isDescendantOfView:navView])
     {
         return NO;
     }
@@ -350,7 +361,7 @@
                     }
                     else
                     {
-                        if ( rootController.view.frame.origin.y > CGRectGetMaxY(navBar.frame) )
+                        if ( rootController.view.frame.origin.y > CGRectGetMaxY(navView.frame) )
                         {
                             // aggancia in alto o fino a dove puoi
                             [self _animateScrollToTop];
@@ -369,7 +380,7 @@
                     }
                     else
                     {
-                        if ( rootController.view.frame.origin.y > CGRectGetMaxY(navBar.frame) )
+                        if ( rootController.view.frame.origin.y > CGRectGetMaxY(navView.frame) )
                         {
                             [self didSwipeGestureUp];
                         }
