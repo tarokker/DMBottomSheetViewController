@@ -12,14 +12,15 @@ Pod::Spec.new do |s|
   s.version      = "1.0.0"
   s.authors      = { "Daniele Maiorana" => "tarokker@gmail.com" }
   s.homepage     = "https://github.com/tarokker/DMBottomSheetViewController"
-  s.summary      = "DGActivityIndicatorView is a great way to make loading spinners in your application look nicer."
-  s.source       = { :git => "https://github.com/gontovnik/DGActivityIndicatorView.git",
-                     :tag => '2.1.1' }
+  s.summary      = "DMBottomSheetViewController."
+  s.source       = { :git => "https://github.com/tarokker/DMBottomSheetViewController.git",
+                     :tag => '1.0.0' }
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.platform = :ios, '7.0'
-  s.source_files = "DGActivityIndicatorView/**/*.{h,m}"
+  s.source_files = "TestBottomSheet/DMBottomSheetViewController.*.{h,m}"
 
   s.requires_arc = true
+  s.resource = 'TestBottomSheet/DMBottomSheetViewController.xcassets'
 
   s.ios.deployment_target = '7.0'
   s.ios.frameworks = ['UIKit', 'Foundation']
