@@ -15,7 +15,6 @@ Pod::Spec.new do |s|
   s.summary      = "DMBottomSheetViewController."
   s.source       = { :git => "https://github.com/tarokker/DMBottomSheetViewController.git",
                      :tag => '1.0.0' }
-  s.license      = { :type => "MIT", :file => "LICENSE" }
   s.platform = :ios, '7.0'
   s.source_files = "TestBottomSheet/DMBottomSheetViewController.*.{h,m}"
 
