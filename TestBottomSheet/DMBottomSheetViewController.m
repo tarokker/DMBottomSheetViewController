@@ -54,6 +54,7 @@
     if ( self = [super init] )
     {
         // config
+        _tapOnBackViewClose = YES;
         isFullOpened = NO;
         CGFloat screenSize = MAX( [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height );
         _minimizedHeight = screenSize / 2.5;
@@ -93,6 +94,10 @@
         [navView addSubview:btnClose];
         [self.view addSubview:navView];
         
+        // tap su background per chiudere
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnBackgroundView:)];
+        [backView addGestureRecognizer:tap];
+
         // aggiunge gesture sulla view
         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPanGesture:)];
         pan.delegate = self;
@@ -388,6 +393,14 @@
                 }
             }
         }
+    }
+}
+
+- (void)didTapOnBackgroundView:(UITapGestureRecognizer *)gesture
+{
+    if ( _tapOnBackViewClose )
+    {
+        [self close:YES withCompletion:nil];
     }
 }
 

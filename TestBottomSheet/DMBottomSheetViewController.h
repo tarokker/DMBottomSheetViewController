@@ -20,6 +20,7 @@
 
 @property(nonatomic, assign) CGFloat minimizedHeight;
 @property(nonatomic, copy) UIFont *titleFont;
+@property(nonatomic, assign) BOOL tapOnBackViewClose;
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootctl;
 - (void)presentInParentController:(UIViewController *)parentctl;
