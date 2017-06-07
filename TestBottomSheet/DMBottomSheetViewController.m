@@ -85,7 +85,7 @@
         lblTitle.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
         lblTitle.backgroundColor = [UIColor clearColor];
         lblTitle.textAlignment = NSTextAlignmentCenter;
-        [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:rootController.title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: self.titleFont}]];
+        [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:(rootController.title?rootController.title:@"") attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: self.titleFont}]];
         shadowNavView = [[UIView alloc] initWithFrame:CGRectMake(0, navView.frame.size.height - 1.0, navView.frame.size.width, 1.0)];
         [shadowNavView setBackgroundColor:[UIColor clearColor]];
         shadowNavView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
@@ -217,7 +217,7 @@
     {
         if ( navView.tag == 0 )
         {
-            [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:rootController.title attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:102.0/255.0 green:102.0/255.0 blue:102.0/255.0 alpha:1.0], NSFontAttributeName: self.titleFont}]];
+            [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:(rootController.title?rootController.title:@"") attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:102.0/255.0 green:102.0/255.0 blue:102.0/255.0 alpha:1.0], NSFontAttributeName: self.titleFont}]];
             [shadowNavView setBackgroundColor:[UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:200.0/255.0 alpha:200.0/255.0]];
             if ( animated )
             {
@@ -236,7 +236,7 @@
     {
         if ( navView.tag == 1 )
         {
-            [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:rootController.title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: self.titleFont}]];
+            [lblTitle setAttributedText:[[NSAttributedString alloc] initWithString:(rootController.title?rootController.title:@"") attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: self.titleFont}]];
             [shadowNavView setBackgroundColor:[UIColor clearColor]];
             [navView setBackgroundColor:[UIColor clearColor]];
             navView.tag = 0;
