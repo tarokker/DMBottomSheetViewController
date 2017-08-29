@@ -60,8 +60,9 @@
         _minimizedHeight = screenSize / 2.5;
         
         // view background trasparente
+        _backViewColorAlpha = 0.8;
         backView = [[UIView alloc] initWithFrame:self.view.bounds];
-        backView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
+        backView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:_backViewColorAlpha];
         backView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self.view addSubview:backView];
         
@@ -181,8 +182,17 @@
         {
             completion();
         }
+        if ( _self.didCloseBlock )
+        {
+            _self.didCloseBlock(_self);
+        }
     };
     
+    if ( _self.willCloseBlock )
+    {
+        _self.willCloseBlock(_self, animated);
+    }
+
     if ( animated )
     {
         [UIView animateWithDuration:0.2 animations:^{

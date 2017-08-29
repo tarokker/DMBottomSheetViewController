@@ -29,7 +29,13 @@
     test.title = @"Povina";
     DMBottomSheetViewController *bottom = [[DMBottomSheetViewController alloc] initWithRootViewController:test];
     [bottom presentInParentController:self];
-    //[self presentViewController:test animated:NO completion:nil];    
+    [bottom setWillCloseBlock:^(DMBottomSheetViewController *source, BOOL animated) {
+        NSLog(@"Will closed");
+    }];
+    [bottom setDidCloseBlock:^(DMBottomSheetViewController *source) {
+        NSLog(@"Did closed");
+    }];
+    //[self presentViewController:test animated:NO completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

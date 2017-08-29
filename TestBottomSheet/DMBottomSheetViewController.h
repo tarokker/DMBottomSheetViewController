@@ -18,9 +18,15 @@
 
 @interface DMBottomSheetViewController : UIViewController<UIGestureRecognizerDelegate>
 
+// config
 @property(nonatomic, assign) CGFloat minimizedHeight;
 @property(nonatomic, copy) UIFont *titleFont;
 @property(nonatomic, assign) BOOL tapOnBackViewClose;
+@property(nonatomic, assign) CGFloat backViewColorAlpha;
+
+// blocchi
+@property (nonatomic, copy) void (^willCloseBlock)(DMBottomSheetViewController *source, BOOL animated);
+@property (nonatomic, copy) void (^didCloseBlock)(DMBottomSheetViewController *source);
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootctl;
 - (void)presentInParentController:(UIViewController *)parentctl;
