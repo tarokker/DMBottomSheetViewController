@@ -60,10 +60,10 @@
         _minimizedHeight = screenSize / 2.5;
         
         // view background trasparente
-        _backViewColorAlpha = 0.8;
         backView = [[UIView alloc] initWithFrame:self.view.bounds];
-        backView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:_backViewColorAlpha];
+        backView.backgroundColor = [UIColor blackColor];
         backView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self setBackViewColorAlpha:0.8];
         [self.view addSubview:backView];
         
         // aggiunge root controller e view root controller
@@ -133,6 +133,15 @@
         _titleFont = [mTitleFont copy];
     }
     return _titleFont;
+}
+
+- (void)setBackViewColorAlpha:(CGFloat)backViewColorAlpha
+{
+    _backViewColorAlpha = backViewColorAlpha;
+    if ( backView )
+    {
+        backView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:_backViewColorAlpha];
+    }
 }
 
 # pragma mark - Apertura / Chiusura

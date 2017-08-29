@@ -28,6 +28,7 @@
     test.view.frame = CGRectMake(0, 0, test.view.frame.size.width, 1200);
     test.title = @"Povina";
     DMBottomSheetViewController *bottom = [[DMBottomSheetViewController alloc] initWithRootViewController:test];
+    [bottom setBackViewColorAlpha:0.5];
     [bottom presentInParentController:self];
     [bottom setWillCloseBlock:^(DMBottomSheetViewController *source, BOOL animated) {
         NSLog(@"Will closed");
