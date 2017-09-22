@@ -11,7 +11,9 @@
 #import "TestViewController.h"
 
 @interface ViewController ()
-
+{
+    IBOutlet UISwitch *switchAutoOpen;
+}
 @end
 
 @implementation ViewController
@@ -22,12 +24,13 @@
     
 }
 
-- (IBAction)btnOpen:(id)sender
+- (IBAction)btnOpen:(UIButton *)sender
 {
     TestViewController *test = [[TestViewController alloc] initWithNibName:@"TestViewController" bundle:nil];
-    test.view.frame = CGRectMake(0, 0, test.view.frame.size.width, 1200);
+    test.view.frame = CGRectMake(0, 0, test.view.frame.size.width, sender.tag == 10 ? 1200 : 500);
     test.title = @"Povina";
     DMBottomSheetViewController *bottom = [[DMBottomSheetViewController alloc] initWithRootViewController:test];
+    [bottom setOpenAlreadyFull:[switchAutoOpen isOn]];
     [bottom setBackViewColorAlpha:0.5];
     [bottom presentInParentController:self];
     [bottom setWillCloseBlock:^(DMBottomSheetViewController *source, BOOL animated) {

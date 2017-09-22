@@ -42,7 +42,7 @@
 
 - (void)_fixPositionYIfTooHigh;
 - (void)_recalcNavbarColors:(BOOL)animated;
-- (void)_animateScrollToTop;
+- (void)_animateScrollToTopWithAddedAnimations:(void(^)())addedAnimations;
 - (void)_animateScrollToHalfWithAddedAnimations:(void(^)())addedAnimations;
 
 @end
@@ -169,12 +169,27 @@
         navView.alpha = 0.0;
         shadowNavView.alpha = 0.0;
         
-        // anima apertura
-        [self _animateScrollToHalfWithAddedAnimations:^{
+        // blocco animazione
+        void(^animationOpeningBlock)() = ^()
+        {
             backView.alpha = 1.0;
             navView.alpha = 1.0;
             shadowNavView.alpha = 1.0;
-        }];
+        };
+
+        // anima apertura
+        if ( _openAlreadyFull )
+        {
+            [self _animateScrollToTopWithAddedAnimations:^{
+                animationOpeningBlock();
+            }];
+        }
+        else
+        {
+            [self _animateScrollToHalfWithAddedAnimations:^{
+                animationOpeningBlock();
+            }];
+        }
     });
 }
 
@@ -264,9 +279,13 @@
 }
 
 // aggancia in alto o fino a dove puoi
-- (void)_animateScrollToTop
+- (void)_animateScrollToTopWithAddedAnimations:(void(^)())addedAnimations
 {
     [UIView animateWithDuration:0.2 animations:^{
+        if ( addedAnimations )
+        {
+            addedAnimations();
+        }
         rootController.view.frame = CGRectMake(rootController.view.frame.origin.x, CGRectGetMaxY(navView.frame), rootController.view.frame.size.width, rootController.view.frame.size.height);
         [self _fixPositionYIfTooHigh];
         [self _recalcNavbarColors:NO];
@@ -310,7 +329,7 @@
     if ( !isFullOpened )
     {
         // aggancia in alto o fino a dove puoi
-        [self _animateScrollToTop];
+        [self _animateScrollToTopWithAddedAnimations:nil];
         isFullOpened = YES;
     }
 }
@@ -388,7 +407,7 @@
                         if ( rootController.view.frame.origin.y > CGRectGetMaxY(navView.frame) )
                         {
                             // aggancia in alto o fino a dove puoi
-                            [self _animateScrollToTop];
+                            [self _animateScrollToTopWithAddedAnimations:nil];
                         }
                     }
                 }

@@ -19,6 +19,7 @@
 @interface DMBottomSheetViewController : UIViewController<UIGestureRecognizerDelegate>
 
 // config
+@property(nonatomic, assign) BOOL openAlreadyFull;
 @property(nonatomic, assign) CGFloat minimizedHeight;
 @property(nonatomic, copy) UIFont *titleFont;
 @property(nonatomic, assign) BOOL tapOnBackViewClose;
