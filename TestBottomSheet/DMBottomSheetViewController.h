@@ -29,7 +29,6 @@
 @property (nonatomic, copy) void (^willCloseBlock)(DMBottomSheetViewController *source, BOOL animated);
 @property (nonatomic, copy) void (^didCloseBlock)(DMBottomSheetViewController *source);
 
-- (instancetype)initWithRootViewController:(UIViewController *)rootctl withCustomCloseButton:(UIButton *)customCloseButton;
 - (instancetype)initWithRootViewController:(UIViewController *)rootctl;
 - (void)presentInParentController:(UIViewController *)parentctl;
 - (void)close:(BOOL)animated withCompletion:(void(^)())completion;

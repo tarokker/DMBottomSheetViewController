@@ -51,14 +51,6 @@
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootctl
 {
-    if ( self = [self initWithRootViewController:rootctl withCustomCloseButton:nil] )
-    {
-    }
-    return self;
-}
-
-- (instancetype)initWithRootViewController:(UIViewController *)rootctl withCustomCloseButton:(UIButton *)customCloseButton
-{
     if ( self = [super init] )
     {
         // config
@@ -85,15 +77,11 @@
         navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64.0)];
         navView.backgroundColor = [UIColor clearColor];
         navView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-        UIButton *btnClose = customCloseButton;
-        if ( !btnClose )
-        {
-            btnClose = [UIButton buttonWithType:UIButtonTypeCustom];
-            [btnClose addTarget:self action:@selector(didTapOnX:) forControlEvents:UIControlEventTouchUpInside];
-            [btnClose setImage:[UIImage imageNamed:@"dmbs_gray_x"] forState:UIControlStateNormal];
-            [btnClose setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
-            [btnClose setFrame:CGRectMake(5, 26, 38, 30)];
-        }
+        UIButton *btnClose = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btnClose addTarget:self action:@selector(didTapOnX:) forControlEvents:UIControlEventTouchUpInside];
+        [btnClose setImage:[UIImage imageNamed:@"dmbs_gray_x"] forState:UIControlStateNormal];
+        [btnClose setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
+        [btnClose setFrame:CGRectMake(5, 26, 38, 30)];
         lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, btnClose.frame.origin.y, navView.frame.size.width, btnClose.frame.size.height)];
         lblTitle.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
         lblTitle.backgroundColor = [UIColor clearColor];
