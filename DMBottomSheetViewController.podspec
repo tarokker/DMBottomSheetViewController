@@ -9,19 +9,19 @@
 Pod::Spec.new do |s|
 
   s.name         = "DMBottomSheetViewController"
-  s.version      = "1.0.8"
+  s.version      = "1.0.9"
   s.authors      = { "Daniele Maiorana" => "tarokker@gmail.com" }
   s.homepage     = "https://github.com/tarokker/DMBottomSheetViewController"
   s.summary      = "DMBottomSheetViewController."
   s.source       = { :git => "https://github.com/tarokker/DMBottomSheetViewController.git",
-                     :tag => '1.0.8' }
+                     :tag => '1.0.9' }
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.platform = :ios, '7.0'
   s.source_files = "TestBottomSheet/DMBottomSheetViewController.{h,m}"
 
   s.requires_arc = true
 
-  s.ios.resource_bundle = { 'DMBottomSheet' => 'DMBottomSheet/images/*.png' }
+  s.resources = ["TestBottomSheet/*.png"]
   s.ios.deployment_target = '7.0'
   s.ios.frameworks = ['UIKit', 'Foundation']
 end
