@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6447C6F01F7921B500FE8A78 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6447C6EF1F7921B500FE8A78 /* Images.xcassets */; };
-		6447C6F21F79222C00FE8A78 /* DMBottomSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6447C6F11F79222C00FE8A78 /* DMBottomSheet.bundle */; };
 		649E4BC81EDDBBB000BF634C /* SFDisplay-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 649E4BB31EDDBB3700BF634C /* SFDisplay-Black.otf */; };
 		649E4BC91EDDBBB000BF634C /* SFDisplay-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 649E4BB41EDDBB3700BF634C /* SFDisplay-Bold.otf */; };
 		649E4BCA1EDDBBB000BF634C /* SFDisplay-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 649E4BB51EDDBB3700BF634C /* SFDisplay-Heavy.otf */; };
@@ -42,7 +41,6 @@
 
 /* Begin PBXFileReference section */
 		6447C6EF1F7921B500FE8A78 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6447C6F11F79222C00FE8A78 /* DMBottomSheet.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DMBottomSheet.bundle; sourceTree = "<group>"; };
 		649E4BB31EDDBB3700BF634C /* SFDisplay-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Black.otf"; sourceTree = "<group>"; };
 		649E4BB41EDDBB3700BF634C /* SFDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Bold.otf"; sourceTree = "<group>"; };
 		649E4BB51EDDBB3700BF634C /* SFDisplay-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Heavy.otf"; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 		64EE50371EDD699000287A20 /* TestBottomSheet */ = {
 			isa = PBXGroup;
 			children = (
-				6447C6F11F79222C00FE8A78 /* DMBottomSheet.bundle */,
 				64EE504F1EDD69F100287A20 /* DMBottomSheetViewController.h */,
 				64EE50501EDD69F100287A20 /* DMBottomSheetViewController.m */,
 				64EE503B1EDD699000287A20 /* AppDelegate.h */,
@@ -222,7 +219,6 @@
 				649E4BCA1EDDBBB000BF634C /* SFDisplay-Heavy.otf in Resources */,
 				6447C6F01F7921B500FE8A78 /* Images.xcassets in Resources */,
 				649E4BCB1EDDBBB000BF634C /* SFDisplay-Light.otf in Resources */,
-				6447C6F21F79222C00FE8A78 /* DMBottomSheet.bundle in Resources */,
 				649E4BCC1EDDBBB000BF634C /* SFDisplay-Medium.otf in Resources */,
 				649E4BCD1EDDBBB000BF634C /* SFDisplay-Regular.otf in Resources */,
 				649E4BCE1EDDBBB000BF634C /* SFDisplay-Semibold.otf in Resources */,

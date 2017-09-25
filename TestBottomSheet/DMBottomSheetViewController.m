@@ -90,7 +90,7 @@
         {
             btnClose = [UIButton buttonWithType:UIButtonTypeCustom];
             [btnClose addTarget:self action:@selector(didTapOnX:) forControlEvents:UIControlEventTouchUpInside];
-            [btnClose setImage:[UIImage imageNamed:@"DMBottomSheet.bundle/images/dmbs_gray_x"] forState:UIControlStateNormal];
+            [btnClose setImage:[UIImage imageNamed:@"dmbs_gray_x"] forState:UIControlStateNormal];
             [btnClose setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
             [btnClose setFrame:CGRectMake(5, 26, 38, 30)];
         }
