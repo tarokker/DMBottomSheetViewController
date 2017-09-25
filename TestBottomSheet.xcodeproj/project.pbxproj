@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		643AC1341EDEB03300EFA13D /* DMBottomSheetViewController.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 643AC1331EDEB03300EFA13D /* DMBottomSheetViewController.xcassets */; };
+		6447C6F01F7921B500FE8A78 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6447C6EF1F7921B500FE8A78 /* Images.xcassets */; };
+		6447C6F21F79222C00FE8A78 /* DMBottomSheet.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6447C6F11F79222C00FE8A78 /* DMBottomSheet.bundle */; };
 		649E4BC81EDDBBB000BF634C /* SFDisplay-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 649E4BB31EDDBB3700BF634C /* SFDisplay-Black.otf */; };
 		649E4BC91EDDBBB000BF634C /* SFDisplay-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 649E4BB41EDDBB3700BF634C /* SFDisplay-Bold.otf */; };
 		649E4BCA1EDDBBB000BF634C /* SFDisplay-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 649E4BB51EDDBB3700BF634C /* SFDisplay-Heavy.otf */; };
@@ -33,7 +34,6 @@
 		64EE503D1EDD699000287A20 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 64EE503C1EDD699000287A20 /* AppDelegate.m */; };
 		64EE50401EDD699000287A20 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64EE503F1EDD699000287A20 /* ViewController.m */; };
 		64EE50431EDD699000287A20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64EE50411EDD699000287A20 /* Main.storyboard */; };
-		64EE50451EDD699000287A20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64EE50441EDD699000287A20 /* Assets.xcassets */; };
 		64EE50481EDD699000287A20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64EE50461EDD699000287A20 /* LaunchScreen.storyboard */; };
 		64EE50511EDD69F100287A20 /* DMBottomSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64EE50501EDD69F100287A20 /* DMBottomSheetViewController.m */; };
 		64EE50551EDD6A2300287A20 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64EE50531EDD6A2300287A20 /* TestViewController.m */; };
@@ -41,7 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		643AC1331EDEB03300EFA13D /* DMBottomSheetViewController.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DMBottomSheetViewController.xcassets; sourceTree = "<group>"; };
+		6447C6EF1F7921B500FE8A78 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6447C6F11F79222C00FE8A78 /* DMBottomSheet.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DMBottomSheet.bundle; sourceTree = "<group>"; };
 		649E4BB31EDDBB3700BF634C /* SFDisplay-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Black.otf"; sourceTree = "<group>"; };
 		649E4BB41EDDBB3700BF634C /* SFDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Bold.otf"; sourceTree = "<group>"; };
 		649E4BB51EDDBB3700BF634C /* SFDisplay-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFDisplay-Heavy.otf"; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		64EE503E1EDD699000287A20 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		64EE503F1EDD699000287A20 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		64EE50421EDD699000287A20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		64EE50441EDD699000287A20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64EE50471EDD699000287A20 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64EE50491EDD699000287A20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64EE504F1EDD69F100287A20 /* DMBottomSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMBottomSheetViewController.h; sourceTree = "<group>"; };
@@ -110,15 +110,15 @@
 		64EE50371EDD699000287A20 /* TestBottomSheet */ = {
 			isa = PBXGroup;
 			children = (
+				6447C6F11F79222C00FE8A78 /* DMBottomSheet.bundle */,
 				64EE504F1EDD69F100287A20 /* DMBottomSheetViewController.h */,
 				64EE50501EDD69F100287A20 /* DMBottomSheetViewController.m */,
-				643AC1331EDEB03300EFA13D /* DMBottomSheetViewController.xcassets */,
 				64EE503B1EDD699000287A20 /* AppDelegate.h */,
 				64EE503C1EDD699000287A20 /* AppDelegate.m */,
 				64EE503E1EDD699000287A20 /* ViewController.h */,
 				64EE503F1EDD699000287A20 /* ViewController.m */,
+				6447C6EF1F7921B500FE8A78 /* Images.xcassets */,
 				64EE50411EDD699000287A20 /* Main.storyboard */,
-				64EE50441EDD699000287A20 /* Assets.xcassets */,
 				64EE50461EDD699000287A20 /* LaunchScreen.storyboard */,
 				64EE50491EDD699000287A20 /* Info.plist */,
 				64EE50381EDD699000287A20 /* Supporting Files */,
@@ -220,7 +220,9 @@
 				649E4BC81EDDBBB000BF634C /* SFDisplay-Black.otf in Resources */,
 				649E4BC91EDDBBB000BF634C /* SFDisplay-Bold.otf in Resources */,
 				649E4BCA1EDDBBB000BF634C /* SFDisplay-Heavy.otf in Resources */,
+				6447C6F01F7921B500FE8A78 /* Images.xcassets in Resources */,
 				649E4BCB1EDDBBB000BF634C /* SFDisplay-Light.otf in Resources */,
+				6447C6F21F79222C00FE8A78 /* DMBottomSheet.bundle in Resources */,
 				649E4BCC1EDDBBB000BF634C /* SFDisplay-Medium.otf in Resources */,
 				649E4BCD1EDDBBB000BF634C /* SFDisplay-Regular.otf in Resources */,
 				649E4BCE1EDDBBB000BF634C /* SFDisplay-Semibold.otf in Resources */,
@@ -235,12 +237,10 @@
 				649E4BD71EDDBBB000BF634C /* SFText-Medium.otf in Resources */,
 				649E4BD81EDDBBB000BF634C /* SFText-MediumItalic.otf in Resources */,
 				649E4BD91EDDBBB000BF634C /* SFText-Regular.otf in Resources */,
-				643AC1341EDEB03300EFA13D /* DMBottomSheetViewController.xcassets in Resources */,
 				649E4BDA1EDDBBB000BF634C /* SFText-RegularItalic.otf in Resources */,
 				649E4BDB1EDDBBB000BF634C /* SFText-Semibold.otf in Resources */,
 				649E4BDC1EDDBBB000BF634C /* SFText-SemiboldItalic.otf in Resources */,
 				64EE50481EDD699000287A20 /* LaunchScreen.storyboard in Resources */,
-				64EE50451EDD699000287A20 /* Assets.xcassets in Resources */,
 				64EE50561EDD6A2300287A20 /* TestViewController.xib in Resources */,
 				64EE50431EDD699000287A20 /* Main.storyboard in Resources */,
 			);
