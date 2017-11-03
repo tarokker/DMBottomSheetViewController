@@ -8,6 +8,15 @@
 
 #import "DMBottomSheetViewController.h"
 
+#define IS_IPHONE               (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define SCREEN_WIDTH            ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT           ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH       (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define IS_IPHONE_X             (IS_IPHONE && SCREEN_MAX_LENGTH == 812.0)
+
+#define kBottomSpaceForIphoneX 36
+#define kTopSpaceForIphoneX 24
+
 @implementation UIViewController (dismissDMBottomSheetViewController)
 
 - (DMBottomSheetViewController *)dmBottomSheetViewController
@@ -36,6 +45,7 @@
     __weak UIViewController *rootController;
     UIView *backView;
     UIView *navView, *shadowNavView;
+    UIView *holderRootView;
     UILabel *lblTitle;
     BOOL isFullOpened;
 }
@@ -66,22 +76,29 @@
         [self setBackViewColorAlpha:0.8];
         [self.view addSubview:backView];
         
-        // aggiunge root controller e view root controller
+        // creiamo root holder view
+        CGFloat bottom = IS_IPHONE_X ? kBottomSpaceForIphoneX : 0;
         rootController = rootctl;
+        holderRootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, rootController.view.frame.size.width, rootController.view.frame.size.height + bottom)];
+        holderRootView.backgroundColor = UIColor.whiteColor;
+        [self.view addSubview:holderRootView];
+        
+        // aggiunge root controller e view root controller
         rootController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self.view addSubview:rootController.view];
+        [holderRootView addSubview:rootController.view];
         [self addChildViewController:rootController];
         
         // navbar
-        navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64.0)];
+        CGFloat top = IS_IPHONE_X ? kTopSpaceForIphoneX : 0;
+        navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64.0 + top)];
         navView.backgroundColor = [UIColor clearColor];
         navView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         UIButton *btnClose = [UIButton buttonWithType:UIButtonTypeCustom];
         [btnClose addTarget:self action:@selector(didTapOnX:) forControlEvents:UIControlEventTouchUpInside];
         [btnClose setImage:[UIImage imageNamed:@"dmbs_gray_x"] forState:UIControlStateNormal];
         [btnClose setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
-        [btnClose setFrame:CGRectMake(5, 26, 38, 30)];
+        [btnClose setFrame:CGRectMake(5, 26 + top, 38, 30)];
         lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, btnClose.frame.origin.y, navView.frame.size.width, btnClose.frame.size.height)];
         lblTitle.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
         lblTitle.backgroundColor = [UIColor clearColor];
@@ -164,7 +181,7 @@
         
         // riposiziona backview
         self.view.frame = parentctl.view.bounds;
-        rootController.view.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, rootController.view.frame.size.height);
+        holderRootView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, holderRootView.frame.size.height);
         backView.alpha = 0.0;
         navView.alpha = 0.0;
         shadowNavView.alpha = 0.0;
@@ -220,7 +237,7 @@
     if ( animated )
     {
         [UIView animateWithDuration:0.2 animations:^{
-            rootController.view.frame = CGRectMake(rootController.view.frame.origin.x, self.view.frame.size.height, rootController.view.frame.size.width, rootController.view.frame.size.height);
+            holderRootView.frame = CGRectMake(holderRootView.frame.origin.x, self.view.frame.size.height, holderRootView.frame.size.width, holderRootView.frame.size.height);
             backView.alpha = 0.0;
             navView.alpha = 0.0;
             shadowNavView.alpha = 0.0;
@@ -239,15 +256,15 @@
 // riposiziona la view se e' troppo in alto
 - (void)_fixPositionYIfTooHigh
 {
-    if ( CGRectGetMaxY(rootController.view.frame) < self.view.frame.size.height )
+    if ( CGRectGetMaxY(holderRootView.frame) < self.view.frame.size.height )
     {
-        rootController.view.frame = CGRectMake(rootController.view.frame.origin.x, self.view.frame.size.height - rootController.view.frame.size.height, rootController.view.frame.size.width, rootController.view.frame.size.height);
+        holderRootView.frame = CGRectMake(holderRootView.frame.origin.x, self.view.frame.size.height - holderRootView.frame.size.height, holderRootView.frame.size.width, holderRootView.frame.size.height);
     }
 }
 
 - (void)_recalcNavbarColors:(BOOL)animated
 {
-    if ( rootController.view.frame.origin.y <= CGRectGetMaxY(navView.frame) )
+    if ( holderRootView.frame.origin.y <= CGRectGetMaxY(navView.frame) )
     {
         if ( navView.tag == 0 )
         {
@@ -286,7 +303,7 @@
         {
             addedAnimations();
         }
-        rootController.view.frame = CGRectMake(rootController.view.frame.origin.x, CGRectGetMaxY(navView.frame), rootController.view.frame.size.width, rootController.view.frame.size.height);
+        holderRootView.frame = CGRectMake(holderRootView.frame.origin.x, CGRectGetMaxY(navView.frame), holderRootView.frame.size.width, holderRootView.frame.size.height);
         [self _fixPositionYIfTooHigh];
         [self _recalcNavbarColors:NO];
     }];
@@ -300,7 +317,7 @@
         {
             addedAnimations();
         }
-        rootController.view.frame = CGRectMake(0, self.view.frame.size.height - MIN(_minimizedHeight, rootController.view.frame.size.height), self.view.frame.size.width,rootController.view.frame.size.height);
+        holderRootView.frame = CGRectMake(0, self.view.frame.size.height - MIN(_minimizedHeight, holderRootView.frame.size.height), self.view.frame.size.width,holderRootView.frame.size.height);
         [self _fixPositionYIfTooHigh];
         [self _recalcNavbarColors:NO];
     }];
@@ -320,7 +337,7 @@
 - (void)didSwipeGestureUp
 {
     // ignora swipe up se la view e' comunque piu' del _minimizedHeight
-    if ( rootController.view.frame.size.height < _minimizedHeight )
+    if ( holderRootView.frame.size.height < _minimizedHeight )
     {
         return;
     }
@@ -352,7 +369,7 @@
 {
     const CGFloat SWIPE_UP_THRESHOLD = 1000.0f;
     
-    CGPoint translatedPoint = [pan translationInView:rootController.view.superview];
+    CGPoint translatedPoint = [pan translationInView:holderRootView.superview];
     
     if ( pan.state == UIGestureRecognizerStateBegan )
     {
@@ -360,9 +377,9 @@
     else if ( pan.state == UIGestureRecognizerStateChanged )
     {
         // transla la view
-        translatedPoint = CGPointMake(rootController.view.center.x, rootController.view.center.y+translatedPoint.y);
-        [rootController.view setCenter:translatedPoint];
-        [pan setTranslation:CGPointZero inView:rootController.view];
+        translatedPoint = CGPointMake(holderRootView.center.x, holderRootView.center.y+translatedPoint.y);
+        [holderRootView setCenter:translatedPoint];
+        [pan setTranslation:CGPointZero inView:holderRootView];
         
         // riposiziona la view se e' troppo in alto
         [self _fixPositionYIfTooHigh];
@@ -373,7 +390,7 @@
     else if (pan.state == UIGestureRecognizerStateEnded)
     {
         // intercetta swipes o panning
-        CGPoint vel = [pan velocityInView:rootController.view.superview];
+        CGPoint vel = [pan velocityInView:holderRootView.superview];
         
         if ( vel.y < -SWIPE_UP_THRESHOLD )
         {
@@ -387,7 +404,7 @@
         {
             // gestione pan
             // chiudi se siamo oltre il margine di chiusura
-            if ( self.view.frame.size.height - rootController.view.frame.origin.y < MIN(_minimizedHeight, rootController.view.frame.size.height) / 2.0)
+            if ( self.view.frame.size.height - holderRootView.frame.origin.y < MIN(_minimizedHeight, holderRootView.frame.size.height) / 2.0)
             {
                 [self close:YES withCompletion:nil];
             }
@@ -398,13 +415,13 @@
                 // altrimenti riposiziona al massimo se non lo siamo gia'
                 if ( isFullOpened )
                 {
-                    if ( self.view.frame.size.height - rootController.view.frame.origin.y < _minimizedHeight )
+                    if ( self.view.frame.size.height - holderRootView.frame.origin.y < _minimizedHeight )
                     {
                         isFullOpened = NO;
                     }
                     else
                     {
-                        if ( rootController.view.frame.origin.y > CGRectGetMaxY(navView.frame) )
+                        if ( holderRootView.frame.origin.y > CGRectGetMaxY(navView.frame) )
                         {
                             // aggancia in alto o fino a dove puoi
                             [self _animateScrollToTopWithAddedAnimations:nil];
@@ -416,14 +433,14 @@
                 // altrimenti metti fullopened se non lo siamo gia'
                 if ( !isFullOpened )
                 {
-                    if ( self.view.frame.size.height - rootController.view.frame.origin.y < _minimizedHeight )
+                    if ( self.view.frame.size.height - holderRootView.frame.origin.y < _minimizedHeight )
                     {
                         // anima l'apertura a meta'
                         [self _animateScrollToHalfWithAddedAnimations:nil];
                     }
                     else
                     {
-                        if ( rootController.view.frame.origin.y > CGRectGetMaxY(navView.frame) )
+                        if ( holderRootView.frame.origin.y > CGRectGetMaxY(navView.frame) )
                         {
                             [self didSwipeGestureUp];
                         }
