@@ -80,7 +80,7 @@
         [self.view addSubview:backView];
         
         // creiamo root holder view
-        CGFloat bottom = IS_IPHONE_X ? kBottomSpaceForIphoneX : 0;
+        CGFloat bottom = IS_IPHONE_X_SERIES ? kBottomSpaceForIphoneX : 0;
         rootController = rootctl;
         holderRootView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, rootController.view.frame.size.width, rootController.view.frame.size.height + bottom)];
         holderRootView.backgroundColor = UIColor.whiteColor;
@@ -93,7 +93,7 @@
         [self addChildViewController:rootController];
         
         // navbar
-        CGFloat top = IS_IPHONE_X ? kTopSpaceForIphoneX : 0;
+        CGFloat top = IS_IPHONE_X_SERIES ? kTopSpaceForIphoneX : 0;
         navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64.0 + top)];
         navView.backgroundColor = [UIColor clearColor];
         navView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
