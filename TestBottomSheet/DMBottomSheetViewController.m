@@ -13,6 +13,9 @@
 #define SCREEN_HEIGHT           ([[UIScreen mainScreen] bounds].size.height)
 #define SCREEN_MAX_LENGTH       (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
 #define IS_IPHONE_X             (IS_IPHONE && SCREEN_MAX_LENGTH == 812.0)
+#define IS_IPHONE_XMAX                                      (IS_IPHONE && SCREEN_MAX_LENGTH == 896.0)
+#define IS_IPHONE_X_SERIES                                  (IS_IPHONE_XMAX || IS_IPHONE_X)
+
 
 #define kBottomSpaceForIphoneX 36
 #define kTopSpaceForIphoneX 24
